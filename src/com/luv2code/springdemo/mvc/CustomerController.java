@@ -12,47 +12,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/student")
-public class StudentController {
-
-    //add an initbinder ... to convet trim input strings
-    //remove leading and trailing whitespace
-    //resolve issue for our validation
+@RequestMapping("/Customer")
+public class CustomerController {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
+
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-
-
     @RequestMapping("/showForm")
-    public String showForm(Model model) {
+    public String showForms(Model model) {
+        model.addAttribute("customer", new Customer());
 
-        //create a new stduent object
-        Student student = new Student();
-
-        //add student object to the model
-        model.addAttribute("student", student);
-
-        //
-        
-        return "student-form";
+        return "customer-form";
     }
 
     @RequestMapping("/processForm")
-    public String processForm(
-                            @Valid @ModelAttribute("student") Student student,
-                            BindingResult bindingResult) {
+    public String processForm(@Valid @ModelAttribute("customer") Customer customer,
+                              BindingResult bindingResult) {
 
-        System.out.println("the Student" + student.getFirstName() + student.getLastName());
-
-        if(bindingResult.hasErrors()) {
-            return "student-form";
+        if (bindingResult.hasErrors()) {
+            return "customer-form";
         } else {
-            return  "student-confirmation";
+            return "customer-confirmation";
         }
 
     }

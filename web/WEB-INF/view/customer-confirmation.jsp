@@ -12,6 +12,10 @@
     <title>Customer Confirmation Form</title>
 </head>
 <body>
-    The Student name is confirmed ${student.firstName} ${student.lastName}
+    The Customer name is confirmed ${customer.firstName} ${customer.lastName}
+
+    <br><br>
+
+    Free passes: ${customer.freePasses}
 </body>
 </html>

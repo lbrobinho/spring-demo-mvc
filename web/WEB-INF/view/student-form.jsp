@@ -27,15 +27,28 @@
         <br><br>
 
         LastName(*): <form:input path="lastName"/>
-                     <form:errors path="lastName" cssClass="error"></form:errors>
+
+
         <br><br>
 
         <form:select path="country">
-            <form:option value="BRA" label="Brazil" />
-            <form:option value="FRN" label="France" />
-            <form:option value="GER" label="Germany" />
-            <form:option value="IND" label="India" />
+            <form:options items="${theCountryOptions}" />
         </form:select>
+        <br><br>
+
+        Favorite Language:
+
+        Java<form:radiobutton path="favoriteLanguage" value="Java" />
+        PHP<form:radiobutton path="favoriteLanguage" value="PHP" />
+        Python<form:radiobutton path="favoriteLanguage" value="Python" />
+       C<form:radiobutton path="favoriteLanguage" value="C" />
+
+        <br><br>
+        Operating Systems:
+
+        Linux <form:checkbox path="operatingSystems" value="Linux"/>
+        Mac OS <form:checkbox path="operatingSystems" value="Mac OS"/>
+        Windows <form:checkbox path="operatingSystems" value="Windows"/>
         <br><br>
 
         <input type="submit" value="Submit">

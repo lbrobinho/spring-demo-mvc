@@ -1,5 +1,6 @@
 package com.luv2code.springdemo.mvc;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/student")
@@ -19,6 +21,10 @@ public class StudentController {
     //remove leading and trailing whitespace
     //resolve issue for our validation
 
+    //inject the properties values into my spring controller
+
+    @Value("#{countryOptions}")
+    private Map<String, String> countryOptions;
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
@@ -37,6 +43,8 @@ public class StudentController {
         //add student object to the model
         model.addAttribute("student", student);
 
+        // add the country options to the model
+        model.addAttribute("theCountryOptions", countryOptions);
         //
         
         return "student-form";
@@ -47,7 +55,8 @@ public class StudentController {
                             @Valid @ModelAttribute("student") Student student,
                             BindingResult bindingResult) {
 
-        System.out.println("the Student" + student.getFirstName() + student.getLastName());
+        System.out.println("the Student" + student.getFirstName() + student.getLastName()
+        + student.getFavoriteLanguage());
 
         if(bindingResult.hasErrors()) {
             return "student-form";

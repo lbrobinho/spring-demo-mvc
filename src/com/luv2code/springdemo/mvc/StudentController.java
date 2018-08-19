@@ -58,6 +58,8 @@ public class StudentController {
         System.out.println("the Student" + student.getFirstName() + student.getLastName()
         + student.getFavoriteLanguage());
 
+        System.out.println("BindingResult is " + bindingResult);
+
         if(bindingResult.hasErrors()) {
             return "student-form";
         } else {
